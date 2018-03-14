@@ -8,7 +8,7 @@
  */
 
 
-#include "coap_config.h"
+#include "coap2/coap_config.h"
 
 #if defined(HAVE_ASSERT_H) && !defined(assert)
 # include <assert.h>
@@ -17,12 +17,12 @@
 #include <stdio.h>
 #include <string.h>
 
-#include "libcoap.h"
-#include "option.h"
-#include "encode.h"                /* for coap_fls() */
-#include "debug.h"
-#include "mem.h"
-#include "utlist.h"
+#include "coap2/libcoap.h"
+#include "coap2/option.h"
+#include "coap2/encode.h"                /* for coap_fls() */
+#include "coap2/debug.h"
+#include "coap2/mem.h"
+#include "coap2/utlist.h"
 
 #define ADVANCE_OPT(o,e,step) if ((e) < step) {           \
     coap_log(LOG_DEBUG, "cannot advance opt past end\n"); \

@@ -7,14 +7,14 @@
  * of use.
  */
 
-#include "coap_config.h"
+#include "coap2/coap_config.h"
 
 #ifdef HAVE_LIBTINYDTLS
 
-#include "net.h"
-#include "address.h"
-#include "debug.h"
-#include "mem.h"
+#include "coap2/net.h"
+#include "coap2/address.h"
+#include "coap2/coap_debug.h"
+#include "coap2/mem.h"
 
 #include <tinydtls.h>
 #include <dtls.h>

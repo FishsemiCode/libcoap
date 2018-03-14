@@ -6,7 +6,7 @@
  * README for terms of use.
  */
 
-#include "coap_config.h"
+#include "coap2/coap_config.h"
 
 #include <ctype.h>
 #include <stdio.h>
@@ -36,23 +36,23 @@
 #endif
 
 #ifdef WITH_LWIP
-#include <lwip/pbuf.h>
-#include <lwip/udp.h>
-#include <lwip/timeouts.h>
+#include <coap2/lwip/pbuf.h>
+#include <coap2/lwip/udp.h>
+#include <coap2/lwip/timeouts.h>
 #endif
 
-#include "libcoap.h"
-#include "utlist.h"
-#include "debug.h"
-#include "mem.h"
-#include "str.h"
-#include "async.h"
-#include "resource.h"
-#include "option.h"
-#include "encode.h"
-#include "block.h"
-#include "net.h"
-#include "utlist.h"
+#include "coap2/libcoap.h"
+#include "coap2/utlist.h"
+#include "coap2/debug.h"
+#include "coap2/mem.h"
+#include "coap2/str.h"
+#include "coap2/async.h"
+#include "coap2/resource.h"
+#include "coap2/option.h"
+#include "coap2/encode.h"
+#include "coap2/block.h"
+#include "coap2/net.h"
+#include "coap2/utlist.h"
 
 #ifndef min
 #define min(a,b) ((a) < (b) ? (a) : (b))
@@ -1110,28 +1110,21 @@ coap_write_session(coap_context_t *ctx, coap_session_t *session, coap_tick_t now
   }
 }
 
-#ifdef WITH_CONTIKI
 COAP_STATIC_INLINE coap_packet_t *
 coap_malloc_packet(void) {
-  return (coap_packet_t *)coap_malloc_type(COAP_PACKET, 0);
+  return (coap_packet_t *)coap_malloc_type(COAP_PACKET, sizeof(coap_packet_t));
 }
 
 void
 coap_free_packet(coap_packet_t *packet) {
   coap_free_type(COAP_PACKET, packet);
 }
-#endif /* WITH_CONTIKI */
 
 static void
 coap_read_session(coap_context_t *ctx, coap_session_t *session, coap_tick_t now) {
-#ifdef WITH_CONTIKI
   coap_packet_t *packet = coap_malloc_packet();
   if ( !packet )
-    return
-#else /* WITH_CONTIKI */
-  coap_packet_t s_packet;
-  coap_packet_t *packet = &s_packet;
-#endif /* WITH_CONTIKI */
+    return;
 
   assert(session->sock.flags & (COAP_SOCKET_CONNECTED | COAP_SOCKET_MULTICAST));
 
@@ -1246,22 +1239,15 @@ coap_read_session(coap_context_t *ctx, coap_session_t *session, coap_tick_t now)
       coap_session_disconnected(session, COAP_NACK_NOT_DELIVERABLE);
   }
 
-#ifdef WITH_CONTIKI
   if ( packet )
     coap_free_packet( packet );
-#endif
 }
 
 static int
 coap_read_endpoint(coap_context_t *ctx, coap_endpoint_t *endpoint, coap_tick_t now) {
   ssize_t bytes_read = -1;
   int result = -1;                /* the value to be returned */
-#ifdef WITH_CONTIKI
   coap_packet_t *packet = coap_malloc_packet();
-#else /* WITH_CONTIKI */
-  coap_packet_t s_packet;
-  coap_packet_t *packet = &s_packet;
-#endif /* WITH_CONTIKI */
 
   assert(COAP_PROTO_NOT_RELIABLE(endpoint->proto));
   assert(endpoint->sock.flags & COAP_SOCKET_BOUND);
@@ -1290,10 +1276,8 @@ coap_read_endpoint(coap_context_t *ctx, coap_endpoint_t *endpoint, coap_tick_t n
     }
   }
 
-#ifdef WITH_CONTIKI
   if (packet)
     coap_free_packet(packet);
-#endif
 
   return result;
 }

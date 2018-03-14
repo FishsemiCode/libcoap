@@ -7,10 +7,10 @@
  * README for terms of use.
  */
 
-#include "coap_config.h"
-#include "mem.h"
-#include "coap_io.h"
-#include <lwip/udp.h>
+#include "coap2/coap_config.h"
+#include "coap2/mem.h"
+#include "coap2/coap_io.h"
+#include <coap2/lwip/udp.h>
 
 #if NO_SYS
 pthread_mutex_t lwprot_mutex = PTHREAD_MUTEX_INITIALIZER;

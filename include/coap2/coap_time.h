@@ -77,6 +77,7 @@ COAP_STATIC_INLINE coap_time_t coap_ticks_to_rt(coap_tick_t t) {
 
 #else
 #include <stdint.h>
+#include <time.h>
 
 /**
  * This data type represents internal timer ticks with COAP_TICKS_PER_SECOND

@@ -6,17 +6,17 @@
  * README for terms of use.
  */
 
-#include "coap_config.h"
+#include "coap2/coap_config.h"
 
 #if defined(HAVE_ASSERT_H) && !defined(assert)
 # include <assert.h>
 #endif
 
-#include "libcoap.h"
-#include "debug.h"
-#include "block.h"
-#include "resource.h"
-#include "coap_hashkey.h"
+#include "coap2/libcoap.h"
+#include "coap2/debug.h"
+#include "coap2/block.h"
+#include "coap2/resource.h"
+#include "coap2/coap_hashkey.h"
 
 #ifndef min
 #define min(a,b) ((a) < (b) ? (a) : (b))
@@ -173,7 +173,7 @@ coap_add_data_blocked_response(coap_resource_t *resource,
     if (coap_get_block(request, COAP_OPTION_BLOCK2, &block2)) {
       block2_requested = 1;
       if (length <= (block2.num << (block2.szx + 4))) {
-        coap_log(LOG_DEBUG, "Illegal block requested (%d > last = %ld)\n",
+        coap_log(LOG_DEBUG, "Illegal block requested (%d > last = %d)\n",
                  block2.num,
                  length >> (block2.szx + 4));
         response->code = COAP_RESPONSE_CODE(400);

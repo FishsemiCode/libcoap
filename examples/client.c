@@ -21,6 +21,7 @@
 #define S_ISDIR(m) (((m) & S_IFMT) == S_IFDIR)
 #endif
 #else
+#include <strings.h>
 #include <unistd.h>
 #include <sys/select.h>
 #include <sys/socket.h>
@@ -1159,8 +1160,12 @@ get_session(
   return session;
 }
 
-int
-main(int argc, char **argv) {
+#ifdef CONFIG_BUILD_KERNEL
+int main(int argc, char **argv)
+#else
+int coap_client_main(int argc, char **argv)
+#endif
+{
   coap_context_t  *ctx = NULL;
   coap_session_t *session = NULL;
   coap_address_t dst;
@@ -1177,6 +1182,8 @@ main(int argc, char **argv) {
   unsigned char user[MAX_USER + 1], key[MAX_KEY];
   ssize_t user_length = 0, key_length = 0;
   int create_uri_opts = 1;
+
+  optlist = NULL;
 
   while ((opt = getopt(argc, argv, "Nra:b:c:e:f:k:m:p:s:t:o:v:A:B:C:O:P:R:T:u:U:l:K:")) != -1) {
     switch (opt) {

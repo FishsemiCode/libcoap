@@ -1,0 +1,29 @@
+#
+# For a description of the syntax of this configuration file,
+# see kconfig-language at https://www.kernel.org/doc/Documentation/kbuild/kconfig-language.txt
+#
+
+config NETUTILS_LIBCOAP
+	bool "The Constrained Application Protocol"
+	default n
+	depends on LIBC_NETDB
+	---help---
+		Enable support for the libcoap library
+
+if NETUTILS_LIBCOAP
+
+config LIBCOAP_CLIENT
+	bool "libcoap client"
+    default n
+
+if LIBCOAP_CLIENT
+config LIBCOAP_CLIENT_PRIORITY
+	int "libcoap client task priority"
+	default 230
+
+config LIBCOAP_CLIENT_STACKSIZE
+	int "libcoap client task stack size"
+	default 4096
+endif
+
+endif

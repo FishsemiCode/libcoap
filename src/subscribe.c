@@ -7,14 +7,14 @@
  * README for terms of use.
  */
 
-#include "coap_config.h"
-#include "coap.h"
+#include "coap2/coap_config.h"
+#include "coap2/coap.h"
 
 #if defined(HAVE_ASSERT_H) && !defined(assert)
 # include <assert.h>
 #endif
 
-#include "subscribe.h"
+#include "coap2/subscribe.h"
 
 void
 coap_subscription_init(coap_subscription_t *s) {

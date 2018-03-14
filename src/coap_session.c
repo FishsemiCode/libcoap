@@ -10,15 +10,15 @@
 #define _COAP_SESSION_H_
 
 
-#include "coap_config.h"
-#include "coap_io.h"
-#include "coap_session.h"
-#include "net.h"
-#include "debug.h"
-#include "mem.h"
-#include "resource.h"
-#include "utlist.h"
-#include "encode.h"
+#include "coap2/coap_config.h"
+#include "coap2/coap_io.h"
+#include "coap2/coap_session.h"
+#include "coap2/net.h"
+#include "coap2/debug.h"
+#include "coap2/mem.h"
+#include "coap2/resource.h"
+#include "coap2/utlist.h"
+#include "coap2/encode.h"
 #include <stdio.h>
 
 

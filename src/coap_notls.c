@@ -7,12 +7,13 @@
 * of use.
 */
 
-#include "coap_config.h"
+#include "coap2/coap_config.h"
 
 #if !defined(HAVE_LIBTINYDTLS) && !defined(HAVE_OPENSSL)
 
-#include "net.h"
+#include "coap2/net.h"
 
+#undef UNUSED
 #ifdef __GNUC__
 #define UNUSED __attribute__((unused))
 #else /* __GNUC__ */

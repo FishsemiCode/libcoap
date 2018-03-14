@@ -6,7 +6,7 @@
  * README for terms of use.
  */
 
-#include "coap_config.h"
+#include "coap2/coap_config.h"
 
 #ifdef HAVE_STDIO_H
 #  include <stdio.h>
@@ -21,10 +21,14 @@
 # define OPTVAL_GT(t)        (t)
 #endif
 #ifdef HAVE_SYS_IOCTL_H
+ #include <fcntl.h>
  #include <sys/ioctl.h>
 #endif
 #ifdef HAVE_NETINET_IN_H
 # include <netinet/in.h>
+#endif
+#ifdef HAVE_ARPA_INET_H
+# include <arpa/inet.h>
 #endif
 #ifdef HAVE_WS2TCPIP_H
 #include <ws2tcpip.h>
@@ -45,14 +49,14 @@
 # include "uip.h"
 #endif
 
-#include "libcoap.h"
-#include "debug.h"
-#include "mem.h"
-#include "net.h"
-#include "coap_io.h"
-#include "pdu.h"
-#include "utlist.h"
-#include "resource.h"
+#include "coap2/libcoap.h"
+#include "coap2/debug.h"
+#include "coap2/mem.h"
+#include "coap2/net.h"
+#include "coap2/coap_io.h"
+#include "coap2/pdu.h"
+#include "coap2/utlist.h"
+#include "coap2/resource.h"
 
 #if !defined(WITH_CONTIKI)
  /* define generic PKTINFO for IPv4 */
@@ -206,7 +210,7 @@ coap_socket_bind_udp(coap_socket_t *sock,
 #ifdef _WIN32
   if (ioctlsocket(sock->fd, FIONBIO, &u_on) == COAP_SOCKET_ERROR) {
 #else
-  if (ioctl(sock->fd, FIONBIO, &on) == COAP_SOCKET_ERROR) {
+  if (fcntl(sock->fd, F_SETFL, fcntl(sock->fd, F_GETFL) | O_NONBLOCK)) {
 #endif
     coap_log(LOG_WARNING,
          "coap_socket_bind_udp: ioctl FIONBIO: %s\n", coap_socket_strerror());
@@ -289,7 +293,7 @@ coap_socket_connect_tcp1(coap_socket_t *sock,
 #ifdef _WIN32
   if (ioctlsocket(sock->fd, FIONBIO, &u_on) == COAP_SOCKET_ERROR) {
 #else
-  if (ioctl(sock->fd, FIONBIO, &on) == COAP_SOCKET_ERROR) {
+  if (fcntl(sock->fd, F_SETFL, fcntl(sock->fd, F_GETFL) | O_NONBLOCK)) {
 #endif
     coap_log(LOG_WARNING,
              "coap_socket_connect_tcp1: ioctl FIONBIO: %s\n",
@@ -427,7 +431,7 @@ coap_socket_bind_tcp(coap_socket_t *sock,
 #ifdef _WIN32
   if (ioctlsocket(sock->fd, FIONBIO, &u_on) == COAP_SOCKET_ERROR) {
 #else
-  if (ioctl(sock->fd, FIONBIO, &on) == COAP_SOCKET_ERROR) {
+  if (fcntl(sock->fd, F_SETFL, fcntl(sock->fd, F_GETFL) | O_NONBLOCK)) {
 #endif
     coap_log(LOG_WARNING, "coap_socket_bind_tcp: ioctl FIONBIO: %s\n",
                            coap_socket_strerror());
@@ -491,8 +495,6 @@ coap_socket_accept_tcp(coap_socket_t *server,
                        coap_address_t *remote_addr) {
 #ifdef _WIN32
   u_long u_on = 1;
-#else
-  int on = 1;
 #endif
 
   server->flags &= ~COAP_SOCKET_CAN_ACCEPT;
@@ -512,7 +514,7 @@ coap_socket_accept_tcp(coap_socket_t *server,
   #ifdef _WIN32
   if (ioctlsocket(new_client->fd, FIONBIO, &u_on) == COAP_SOCKET_ERROR) {
 #else
-  if (ioctl(new_client->fd, FIONBIO, &on) == COAP_SOCKET_ERROR) {
+  if (fcntl(new_client->fd, F_SETFL, fcntl(new_client->fd, F_GETFL) | O_NONBLOCK)) {
 #endif
     coap_log(LOG_WARNING, "coap_socket_accept_tcp: ioctl FIONBIO: %s\n",
              coap_socket_strerror());
@@ -548,7 +550,7 @@ coap_socket_connect_udp(coap_socket_t *sock,
 #ifdef _WIN32
   if (ioctlsocket(sock->fd, FIONBIO, &u_on) == COAP_SOCKET_ERROR) {
 #else
-  if (ioctl(sock->fd, FIONBIO, &on) == COAP_SOCKET_ERROR) {
+  if (fcntl(sock->fd, F_SETFL, fcntl(sock->fd, F_GETFL) | O_NONBLOCK)) {
 #endif
     coap_log(LOG_WARNING, "coap_socket_connect_udp: ioctl FIONBIO: %s\n",
              coap_socket_strerror());
