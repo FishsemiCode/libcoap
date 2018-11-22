@@ -10,6 +10,8 @@
 #ifndef _COAP_DEBUG_H_
 #define _COAP_DEBUG_H_
 
+#include "libcoap.h"
+
 /**
  * @defgroup logging Logging Support
  * API functions for logging support

@@ -7,10 +7,10 @@
  */
 
 
-#include "coap2/coap_config.h"
-#include "coap2/libcoap.h"
-#include "coap2/mem.h"
-#include "coap2/debug.h"
+#include "coap_config.h"
+#include "libcoap.h"
+#include "mem.h"
+#include "debug.h"
 
 #ifdef HAVE_ASSERT_H
 #include <assert.h>

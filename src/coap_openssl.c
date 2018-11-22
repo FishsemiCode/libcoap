@@ -8,7 +8,7 @@
 * of use.
 */
 
-#include "coap2/coap_config.h"
+#include "coap_config.h"
 
 #ifdef HAVE_OPENSSL
 
@@ -40,15 +40,15 @@
  * have additional run time checks.
  *
  */
-#include "coap2/net.h"
-#include "coap2/mem.h"
-#include "coap2/debug.h"
-#include "coap2/prng.h"
-#include <coap2/openssl/ssl.h>
-#include <coap2/openssl/err.h>
-#include <coap2/openssl/rand.h>
-#include <coap2/openssl/hmac.h>
-#include <coap2/openssl/x509v3.h>
+#include "net.h"
+#include "mem.h"
+#include "debug.h"
+#include "prng.h"
+#include <openssl/ssl.h>
+#include <openssl/err.h>
+#include <openssl/rand.h>
+#include <openssl/hmac.h>
+#include <openssl/x509v3.h>
 
 #if OPENSSL_VERSION_NUMBER < 0x10100000L
 #error Must be compiled against OpenSSL 1.1.0 or later

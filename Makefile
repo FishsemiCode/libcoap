@@ -51,4 +51,6 @@ endif
 CSRCS = $(patsubst $(SRCDIR)/%,%,$(wildcard $(SRCDIR)/src/*.c))
 CSRCS := $(filter-out src/coap_io_lwip.c,$(CSRCS))
 
+CFLAGS += -I$(SRCDIR)/include/coap2
+
 include $(APPDIR)/Application.mk

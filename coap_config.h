@@ -34,12 +34,9 @@
  ****************************************************************************/
 
 #include <nuttx/config.h>
+
 /* coap_config.h.  Generated from coap_config.h.in by configure.  */
 /* coap_config.h.in.  Generated from configure.ac by autoheader.  */
-
-#define HAVE_SYS_IOCTL_H 1
-
-#define HAVE_SYS_SELECT_H 1
 
 /* Define if building universal (internal helper macro) */
 /* #undef AC_APPLE_UNIVERSAL_BUILD */
@@ -51,16 +48,24 @@
 #define HAVE_ASSERT_H 1
 
 /* Define to 1 if you have the <dlfcn.h> header file. */
-#define HAVE_DLFCN_H 0
+#define HAVE_DLFCN_H 1
 
 /* Define to 1 if you have the `getaddrinfo' function. */
+#ifdef CONFIG_LIBC_NETDB
 #define HAVE_GETADDRINFO 1
+#endif
 
 /* Define to 1 if you have the <inttypes.h> header file. */
 #define HAVE_INTTYPES_H 1
 
 /* Define if the system has libcunit */
 /* #undef HAVE_LIBCUNIT */
+
+/* Define if the system has libgnutls28 */
+/* #undef HAVE_LIBGNUTLS */
+
+/* Define if the system has libtinydtls */
+/* #undef HAVE_LIBTINYDTLS */
 
 /* Define to 1 if you have the <limits.h> header file. */
 #define HAVE_LIMITS_H 1
@@ -80,11 +85,18 @@
 /* Define to 1 if you have the <netinet/in.h> header file. */
 #define HAVE_NETINET_IN_H 1
 
+/* Define if the system has libssl1.1 */
+/* #undef HAVE_OPENSSL */
+
 /* Define to 1 if you have the `select' function. */
+#ifndef CONFIG_DISABLE_POLL
 #define HAVE_SELECT 1
+#endif
 
 /* Define to 1 if you have the `socket' function. */
+#ifdef CONFIG_NET
 #define HAVE_SOCKET 1
+#endif
 
 /* Define to 1 if you have the <stdint.h> header file. */
 #define HAVE_STDINT_H 1
@@ -110,6 +122,12 @@
 /* Define to 1 if you have the <syslog.h> header file. */
 #define HAVE_SYSLOG_H 1
 
+/* Define to 1 if you have the <sys/ioctl.h> header file. */
+#define HAVE_SYS_IOCTL_H 1
+
+/* Define to 1 if you have the <sys/select.h> header file. */
+#define HAVE_SYS_SELECT_H 1
+
 /* Define to 1 if you have the <sys/socket.h> header file. */
 #define HAVE_SYS_SOCKET_H 1
 
@@ -123,7 +141,7 @@
 #define HAVE_SYS_TYPES_H 1
 
 /* Define to 1 if you have the <sys/unistd.h> header file. */
-#define HAVE_SYS_UNISTD_H 1
+/* #undef HAVE_SYS_UNISTD_H */
 
 /* Define to 1 if you have the <time.h> header file. */
 #define HAVE_TIME_H 1
@@ -141,7 +159,7 @@
 #define PACKAGE_NAME "libcoap"
 
 /* Define to the full name and version of this package. */
-#define PACKAGE_STRING "libcoap 4.1.2"
+#define PACKAGE_STRING "libcoap 4.2.0rc2"
 
 /* Define to the one symbol short name of this package. */
 #define PACKAGE_TARNAME "libcoap"
@@ -150,7 +168,7 @@
 #define PACKAGE_URL "https://libcoap.net/"
 
 /* Define to the version of this package. */
-#define PACKAGE_VERSION "4.1.2"
+#define PACKAGE_VERSION "4.2.0rc2"
 
 /* Define to 1 if you have the ANSI C header files. */
 #define STDC_HEADERS 1

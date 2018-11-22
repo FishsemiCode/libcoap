@@ -6,7 +6,7 @@
  * README for terms of use.
  */
 
-#include "coap2/coap_config.h"
+#include "coap_config.h"
 
 #ifdef HAVE_TIME_H
 #include <time.h>
@@ -21,8 +21,8 @@
 #include <stdint.h>
 #endif
 
-#include "coap2/libcoap.h"
-#include "coap2/coap_time.h"
+#include "libcoap.h"
+#include "coap_time.h"
 
 static coap_tick_t coap_clock_offset = 0;
 

@@ -7,14 +7,14 @@
  */
 
 #include <stdio.h>
-#include "coap2/coap_config.h"
-#include "coap2/coap.h"
-#include "coap2/debug.h"
-#include "coap2/mem.h"
-#include "coap2/net.h"
-#include "coap2/resource.h"
-#include "coap2/subscribe.h"
-#include "coap2/utlist.h"
+#include "coap_config.h"
+#include "coap.h"
+#include "debug.h"
+#include "mem.h"
+#include "net.h"
+#include "resource.h"
+#include "subscribe.h"
+#include "utlist.h"
 
 #if defined(WITH_LWIP)
 /* mem.h is only needed for the string free calls for

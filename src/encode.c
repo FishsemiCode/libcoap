@@ -10,10 +10,10 @@
 #  include <stdio.h>
 #endif
 
-#include "coap2/coap_config.h"
-#include "coap2/coap.h"
-#include "coap2/mem.h"
-#include "coap2/encode.h"
+#include "coap_config.h"
+#include "coap.h"
+#include "mem.h"
+#include "encode.h"
 
 /* Carsten suggested this when fls() is not available: */
 #ifndef HAVE_FLS

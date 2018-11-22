@@ -6,7 +6,7 @@
  * README for terms of use.
  */
 
-#include "coap2/coap_config.h"
+#include "coap_config.h"
 
 #ifdef HAVE_STDIO_H
 #  include <stdio.h>
@@ -49,14 +49,14 @@
 # include "uip.h"
 #endif
 
-#include "coap2/libcoap.h"
-#include "coap2/debug.h"
-#include "coap2/mem.h"
-#include "coap2/net.h"
-#include "coap2/coap_io.h"
-#include "coap2/pdu.h"
-#include "coap2/utlist.h"
-#include "coap2/resource.h"
+#include "libcoap.h"
+#include "debug.h"
+#include "mem.h"
+#include "net.h"
+#include "coap_io.h"
+#include "pdu.h"
+#include "utlist.h"
+#include "resource.h"
 
 #if !defined(WITH_CONTIKI)
  /* define generic PKTINFO for IPv4 */

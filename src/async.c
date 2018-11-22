@@ -13,12 +13,12 @@
 
 #ifndef WITHOUT_ASYNC
 
-#include "coap2/coap_config.h"
-#include "coap2/coap.h"
-#include "coap2/async.h"
-#include "coap2/debug.h"
-#include "coap2/mem.h"
-#include "coap2/utlist.h"
+#include "coap_config.h"
+#include "coap.h"
+#include "async.h"
+#include "debug.h"
+#include "mem.h"
+#include "utlist.h"
 
 /* utlist-style macros for searching pairs in linked lists */
 #define SEARCH_PAIR(head,out,field1,val1,field2,val2)   \

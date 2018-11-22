@@ -6,7 +6,7 @@
  * README for terms of use.
  */
 
-#include "coap2/coap_config.h"
+#include "coap_config.h"
 
 #if !defined(WITH_CONTIKI) && !defined(WITH_LWIP)
 #ifdef HAVE_ASSERT_H
@@ -25,7 +25,7 @@
 #include <ws2tcpip.h>
 #endif
 
-#include "coap2/address.h"
+#include "address.h"
 
 int
 coap_address_equals(const coap_address_t *a, const coap_address_t *b) {

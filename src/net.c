@@ -6,7 +6,7 @@
  * README for terms of use.
  */
 
-#include "coap2/coap_config.h"
+#include "coap_config.h"
 
 #include <ctype.h>
 #include <stdio.h>
@@ -36,23 +36,23 @@
 #endif
 
 #ifdef WITH_LWIP
-#include <coap2/lwip/pbuf.h>
-#include <coap2/lwip/udp.h>
-#include <coap2/lwip/timeouts.h>
+#include <lwip/pbuf.h>
+#include <lwip/udp.h>
+#include <lwip/timeouts.h>
 #endif
 
-#include "coap2/libcoap.h"
-#include "coap2/utlist.h"
-#include "coap2/debug.h"
-#include "coap2/mem.h"
-#include "coap2/str.h"
-#include "coap2/async.h"
-#include "coap2/resource.h"
-#include "coap2/option.h"
-#include "coap2/encode.h"
-#include "coap2/block.h"
-#include "coap2/net.h"
-#include "coap2/utlist.h"
+#include "libcoap.h"
+#include "utlist.h"
+#include "debug.h"
+#include "mem.h"
+#include "str.h"
+#include "async.h"
+#include "resource.h"
+#include "option.h"
+#include "encode.h"
+#include "block.h"
+#include "net.h"
+#include "utlist.h"
 
 #ifndef min
 #define min(a,b) ((a) < (b) ? (a) : (b))
