@@ -67,15 +67,6 @@ coap_clock_init(void) {
   coap_clock_offset = tv.tv_sec;
 }
 
-/* creates a Qx.frac from fval */
-#define Q(frac,fval) ((coap_tick_t)(((1 << (frac)) * (fval))))
-
-/* number of frac bits for sub-seconds */
-#define FRAC 10
-
-/* rounds val up and right shifts by frac positions */
-#define SHR_FP(val,frac) (((val) + (1 << ((frac) - 1))) >> (frac))
-
 void
 coap_ticks(coap_tick_t *t) {
   coap_tick_t tmp;
@@ -89,7 +80,7 @@ coap_ticks(coap_tick_t *t) {
    * Both cases should not be possible here.
    */
 
-  tmp = SHR_FP(tv.tv_nsec * Q(FRAC, (COAP_TICKS_PER_SECOND/1000000000.0)), FRAC);
+  tmp = tv.tv_nsec / (1000000000 / COAP_TICKS_PER_SECOND);
 #else /* _POSIX_TIMERS */
   /* Fall back to gettimeofday() */
 
@@ -101,7 +92,7 @@ coap_ticks(coap_tick_t *t) {
    * Both cases should not be possible here.
    */
 
-  tmp = SHR_FP(tv.tv_usec * Q(FRAC, (COAP_TICKS_PER_SECOND/1000000.0)), FRAC);
+  tmp = tv.tv_usec / (1000000 / COAP_TICKS_PER_SECOND);
 #endif /* not _POSIX_TIMERS */
 
   /* Finally, convert temporary FP representation to multiple of
@@ -121,10 +112,6 @@ uint64_t coap_ticks_to_rt_us(coap_tick_t t) {
 coap_tick_t coap_ticks_from_rt_us(uint64_t t) {
   return (coap_tick_t)((t - (uint64_t)coap_clock_offset * 1000000) * COAP_TICKS_PER_SECOND / 1000000);
 }
-
-#undef Q
-#undef FRAC
-#undef SHR_FP
 
 #else /* HAVE_TIME_H */
 
