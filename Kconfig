@@ -14,7 +14,7 @@ if NETUTILS_LIBCOAP
 
 config LIBCOAP_CLIENT
 	bool "libcoap client"
-    default n
+	default n
 
 if LIBCOAP_CLIENT
 config LIBCOAP_CLIENT_PRIORITY
