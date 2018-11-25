@@ -459,7 +459,7 @@ is_binary(int content_format) {
 
 void
 coap_show_pdu(coap_log_t level, const coap_pdu_t *pdu) {
-  unsigned char buf[1024]; /* need some space for output creation */
+  unsigned char buf[64]; /* need some space for output creation */
   size_t buf_len = 0; /* takes the number of bytes written to buf */
   int encode = 0, have_options = 0, i;
   coap_opt_iterator_t opt_iter;
@@ -636,10 +636,12 @@ coap_show_pdu(coap_log_t level, const coap_pdu_t *pdu) {
       outbuflen = strlen(outbuf);
       snprintf(&outbuf[outbuflen], sizeof(outbuf)-outbuflen,  ">>");
     } else {
-      if (print_readable(data, data_len, buf, sizeof(buf), 0)) {
-        outbuflen = strlen(outbuf);
-        snprintf(&outbuf[outbuflen], sizeof(outbuf)-outbuflen,  "'%s'", buf);
-      }
+      outbuflen = strlen(outbuf);
+      snprintf(&outbuf[outbuflen], sizeof(outbuf)-outbuflen,  "'");
+      outbuflen = strlen(outbuf);
+      print_readable(data, data_len, &outbuf[outbuflen], sizeof(outbuf)-outbuflen, 0);
+      outbuflen = strlen(outbuf);
+      snprintf(&outbuf[outbuflen], sizeof(outbuf)-outbuflen,  "'");
     }
   }
 
@@ -661,11 +663,7 @@ coap_log_impl(coap_log_t level, const char *format, ...) {
     return;
 
   if (log_handler) {
-#if defined(WITH_CONTIKI) || defined(WITH_LWIP)
-    char message[128];
-#else
-    char message[8 + 1024 * 2]; /* O/H + Max packet payload size * 2 */
-#endif
+    char message[COAP_DEBUG_BUF_SIZE];
     va_list ap;
     va_start(ap, format);
     vsnprintf( message, sizeof(message), format, ap);
