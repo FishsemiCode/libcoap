@@ -173,9 +173,9 @@ coap_add_data_blocked_response(coap_resource_t *resource,
     if (coap_get_block(request, COAP_OPTION_BLOCK2, &block2)) {
       block2_requested = 1;
       if (length <= (block2.num << (block2.szx + 4))) {
-        coap_log(LOG_DEBUG, "Illegal block requested (%d > last = %d)\n",
+        coap_log(LOG_DEBUG, "Illegal block requested (%d > last = %ld)\n",
                  block2.num,
-                 length >> (block2.szx + 4));
+                 (long)length >> (block2.szx + 4));
         response->code = COAP_RESPONSE_CODE(400);
         goto error;
       }

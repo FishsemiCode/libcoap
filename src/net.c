@@ -1115,7 +1115,7 @@ coap_malloc_packet(void) {
   return (coap_packet_t *)coap_malloc_type(COAP_PACKET, sizeof(coap_packet_t));
 }
 
-void
+COAP_STATIC_INLINE void
 coap_free_packet(coap_packet_t *packet) {
   coap_free_type(COAP_PACKET, packet);
 }
