@@ -639,7 +639,8 @@ coap_show_pdu(coap_log_t level, const coap_pdu_t *pdu) {
       outbuflen = strlen(outbuf);
       snprintf(&outbuf[outbuflen], sizeof(outbuf)-outbuflen,  "'");
       outbuflen = strlen(outbuf);
-      print_readable(data, data_len, &outbuf[outbuflen], sizeof(outbuf)-outbuflen, 0);
+      print_readable(data, data_len, (unsigned char *)&outbuf[outbuflen],
+                     sizeof(outbuf)-outbuflen, 0);
       outbuflen = strlen(outbuf);
       snprintf(&outbuf[outbuflen], sizeof(outbuf)-outbuflen,  "'");
     }
