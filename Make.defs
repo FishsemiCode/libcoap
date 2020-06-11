@@ -51,5 +51,5 @@
 ############################################################################
 
 ifeq ($(CONFIG_NETUTILS_LIBCOAP),y)
-CONFIGURED_APPS += external/system/libcoap
+CONFIGURED_APPS += $(APPDIR)/external/system/libcoap
 endif
